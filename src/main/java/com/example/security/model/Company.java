@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "company")
 @Entity
-public class CompanyModel {
+public class Company {
     @Id
     @GeneratedValue
     private Long id;

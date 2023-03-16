@@ -54,6 +54,13 @@ public class JwtService {
         return extractClaim(token, Claims::getExpiration);
     }
 
+    public Long getExpirationToken(String token) {
+        final Claims claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+        final Date expiration = claims.getExpiration();
+        final long expirationTime = expiration.getTime();
+        return (expirationTime - System.currentTimeMillis());
+    }
+
     private Key getSignInKey() {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);

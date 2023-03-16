@@ -1,4 +1,4 @@
-package com.example.security.user;
+package com.example.security.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,20 +16,26 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "user")
 @Entity
-@Table(name = "_user")
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue
-    private Integer id;
-    private String firstname;
-    private String lastname;
-    private String email;
+    private Long id;
+    private String username;
     private String password;
-
     @Enumerated(EnumType.STRING)
     private Role role;
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
+    @ManyToOne
+    @JoinColumn(name = "channel_id")
+    private Channel channel;
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    private Team team;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -43,7 +49,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     @Override

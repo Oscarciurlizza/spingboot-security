@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "channel")
 @Entity
-public class ChannelModel {
+public class Channel {
     @Id
     @GeneratedValue
     private Long id;
